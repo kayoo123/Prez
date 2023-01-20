@@ -12,7 +12,7 @@ jobs:
   build_html-pdf:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Install MARP
       run: |
         curl -L https://github.com/marp-team/marp-cli/releases/download/v2.3.0/marp-cli-v2.3.0-linux.tar.gz | tar xz
@@ -22,6 +22,8 @@ jobs:
         marp --html --pdf *.md --output-dir docs
     - name: Commit HTML & PDF
       run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add docs/*.html
         git add docs/*.pdf
         git commit -m "Generated HTML & PDF"
