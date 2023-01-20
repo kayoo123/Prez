@@ -9,40 +9,23 @@ on:
 
 jobs:
 
-  update_index:
+  build_html-pdf:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Update index.html
-        run: |
-          for input in *.md
-          do
-            echo "<a href=\"$input.html\"><li class=\"item float-item\">$input</li></a>" >> docs/index.html
-          done
-      - name: Commit Index
-        run: |
-          git config --global user.email "jeri.dsql@gmail.com"
-          git config --global user.name "kayoo123"
-          git add docs/index.html
-          git commit -m "Update index.html"
-          git push
-
-  build_html:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Build HTML
-        uses: docker://marpteam/marp-cli:v2.3.0
-        with:
-          args: test.md -o docs/test.html
-        env:
-          MARP_USER: root:root
-      - name: Commit html
-        run: |
-          git config --global user.email "jeri.dsql@gmail.com"
-          git config --global user.name "kayoo123"
-          git add docs/*.html
-          git commit -m "Update *.html"
-          git push
+    - uses: actions/checkout@v2
+    - name: Install MARP
+      run: |
+        curl -L https://github.com/marp-team/marp-cli/releases/download/v2.3.0/marp-v2.3.0-linux-x86_64.tar.gz | tar xz
+        sudo mv marp /usr/local/bin
+    - name: Generate HTML & PDF
+      run: |
+        marp --html --pdf *.md --output-dir docs
+    - name: Commit HTML & PDF
+      run: |
+        git add docs/*.html
+        git add docs/*.pdf
+        git commit -m "Generated HTML & PDF"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
