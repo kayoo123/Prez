@@ -16,10 +16,10 @@ https://marp.app/
 Split pages by horizontal ruler (`---`). It's very simple! :satisfied:
 ```markdown
 # Slide 1
-foobar
+foobar1
 
 ---
 # Slide 2
-foobar
+foobar2
 ```
 
