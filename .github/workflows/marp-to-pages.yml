@@ -17,9 +17,14 @@ jobs:
       run: |
         curl -L https://github.com/marp-team/marp-cli/releases/download/v2.3.0/marp-cli-v2.3.0-linux.tar.gz | tar xz
         sudo mv marp /usr/local/bin
-    - name: Generate HTML & PDF
+    - name: Generate HTML
       run: |
-        marp --html --pdf *.md --output-dir docs
+        cd docs
+        marp --html *.md
+    - name: Generate PDF
+      run: |
+        cd docs
+        marp --pdf *.md
     - name: Commit HTML & PDF
       run: |
         git config --local user.email "action@github.com"
