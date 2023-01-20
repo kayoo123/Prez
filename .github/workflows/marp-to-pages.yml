@@ -39,10 +39,10 @@ jobs:
     - name: Generate README.md
       run: |
         echo '# [Prez](https://kayoo123.github.io/Prez/):' > README.md
-        echo -e '| Markdown | PDF   | HTML |\n| :------: | :---: | :---:|' >> README.md
+        echo -e '| Markdown(edit) | PDF   | HTML |\n| :------: | :---: | :---:|' >> README.md
         for input in docs/*.md; do
           filename=$(basename -s .md $input)
-          echo "| [${filename}.md](https://raw.githubusercontent.com/kayoo123/Prez/main/${filename}.md) | [${filename}.pdf](https://kayoo123.github.io/Prez/${filename}.pdf) | [${filename}.html](https://kayoo123.github.io/Prez/${filename}.html)" >> README.md
+          echo "| [${filename}.md](https://github.com/kayoo123/Prez/edit/main/docs/${filename}.md) | [${filename}.pdf](https://kayoo123.github.io/Prez/${filename}.pdf) | [${filename}.html](https://kayoo123.github.io/Prez/${filename}.html)" >> README.md
         done
     - name: Commit README.md
       run: |
