@@ -17,7 +17,7 @@ jobs:
       run: |
         cd docs
         sed -i "/item float-item/d" index.html
-        for input in docs/*.md; do
+        for input in *.md; do
            sed -i -e "s|<!-- LIST -->|<!-- LIST -->\n\t<a href='${input%.*}.html'><li class='item float-item'>${input%.*}</li></a>|g" index.html
         done
     - name: Commit index
