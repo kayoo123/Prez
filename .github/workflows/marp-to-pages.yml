@@ -9,6 +9,26 @@ on:
 
 jobs:
 
+  update_index:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Generate HTML
+      run: |
+        for input in docs/*.md; do
+          echo $input
+        done
+    - name: Commit index
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/index.html
+        git commit -m "Generated HTML & PDF"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    
   build_html-pdf:
     runs-on: ubuntu-latest
     steps:
