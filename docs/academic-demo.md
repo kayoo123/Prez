@@ -82,3 +82,6 @@ $$
 2. この Markdown のあるディレクトリの中に `images` という名前のディレクトリを作り、先ほどダウンロードした画像を配置してください。これで準備が整いました。
 
 ![w:300 center](./images/kenkyu_woman_seikou.png)
+
+
+
