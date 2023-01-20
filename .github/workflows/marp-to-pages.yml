@@ -31,7 +31,31 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    
+
+  update_readme:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Generate README.md
+      run: |
+        echo '# [Prez](https://kayoo123.github.io/Prez/):' > README.md
+        echo -e '| Markdown | PDF   | HTML |\n| :------: | :---: | :---:|' >> README.md
+        for input in docs/*.md; do
+          filename=$(basename -s .md $input)
+          echo "| [${filename}.md](https://raw.githubusercontent.com/kayoo123/Prez/main/${filename}.md) | [${filename}.pdf](https://kayoo123.github.io/Prez/${filename}.pdf) | [${filename}.html](https://kayoo123.github.io/Prez/${filename}.html)" >> README.md
+        done
+    - name: Commit README.md
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md
+        git commit -m "Generated README.md"
+        git pull --rebase
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
   build_html-pdf:
     runs-on: ubuntu-latest
     steps:
