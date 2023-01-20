@@ -14,30 +14,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+	  - name: Checkout code
         uses: actions/checkout@v3
 
-	    # Get list file.md 
-	    - name: Get list file.md
+	  # Get list file.md 
+	  - name: Get list file.md
         run: echo Hello, world!
 	  
-	    # Update index.html 
-	    - name: Update index.html
+	  # Update index.html 
+	  - name: Update index.html
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
 	  
-	    # Build PDF
-	    - name: Build PDF
-		  uses: docker://marpteam/marp-cli:v2.3.0
+	  # Build PDF
+	  - name: Build PDF
+		uses: docker://marpteam/marp-cli:v2.3.0
         with:
           args: test.md -o docs/index.pdf
         env:
           MARP_USER: root:root
 	  
-	    # Build HTML
-	    - name: Build HTML
-		  uses: docker://marpteam/marp-cli:v2.3.0
+	  # Build HTML
+	  - name: Build HTML
+		uses: docker://marpteam/marp-cli:v2.3.0
         with:
           args: test.md -o docs/index.html
         env:
