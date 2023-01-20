@@ -25,7 +25,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add docs/index.html
-        git commit -m "Generated HTML & PDF"
+        git commit -m "Generated index.html" || true
         git pull --rebase
     - name: Push changes
       uses: ad-m/github-push-action@master
@@ -50,7 +50,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add README.md
-        git commit -m "Generated README.md"
+        git commit -m "Generated README.md" || true
         git pull --rebase
     - name: Push changes
       uses: ad-m/github-push-action@master
