@@ -4,36 +4,41 @@
 name: marp-to-pages
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+    paths:
+      - '**/*.md'
 
 jobs:
-  build:
+
+  update_index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Update index.html
+        run: |
+          for input in *.md
+          do
+            echo "<a href=\"$input.html\"><li class=\"item float-item\">$input</li></a>" >> docs/index.html
+          done
+      - name: Commit Index
+        run: |
+          git add docs/index.html
+          git commit -m "Update index.html"
+
+  build_html:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
   
-      - name: Get list file.md
-        run: echo Hello, world!
-  
-      - name: Update index.html
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
-      - name: Build PDF
-        uses: docker://marpteam/marp-cli:v2.3.0
-        with:
-          args: test.md -o docs/index.pdf
-        env:
-          MARP_USER: root:root
-
       - name: Build HTML
         uses: docker://marpteam/marp-cli:v2.3.0
         with:
-          args: test.md -o docs/index.html
+          args: test.md -o docs/test.html
         env:
           MARP_USER: root:root
+  
+      - name: Commit html
+        run: |
+          git add docs/*.html
+          git commit -m "Update *.html"
