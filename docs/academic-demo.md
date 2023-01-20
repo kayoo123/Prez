@@ -4,11 +4,6 @@ theme: academic
 paginate: true
 math: katex
 ---
-<style>
-section {
-  background: yellow;
-}
-</style>
 
 <!-- _class: lead -->
 
