@@ -69,13 +69,27 @@ jobs:
     - name: Generate HTML
       run: |
         cd docs
-        #marp --allow-local-files --theme ../themes/*.css --html *.md
-        marp --html *.md
+        for input in *.md; do
+          unset theme
+          theme=$(grep 'theme:' $input |awk '{ print $NF }')
+          if [[ -f ../themes/${theme}.css ]]; then
+            marp --allow-local-files --theme ../themes/${theme}.css --html ${input}
+          else 
+            marp --html ${input}
+          fi
+        done
     - name: Generate PDF
       run: |
         cd docs
-        #marp --allow-local-files --theme ../themes/*.css --pdf *.md
-        marp --pdf *.md
+        for input in *.md; do
+          unset theme
+          theme=$(grep 'theme:' $input |awk '{ print $NF }')
+          if [[ -f ../themes/${theme}.css ]]; then
+            marp --allow-local-files --theme ../themes/${theme}.css --pdf ${input}
+          else 
+            marp --pdf ${input}
+          fi
+        done
     - name: Commit HTML & PDF
       run: |
         git config --local user.email "action@github.com"
