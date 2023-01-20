@@ -1,3 +1,3 @@
 # Prez:
 
-## [test.pdf](https://kayoo123.github.io/Prez/test.pdf){:target="_blank"}
+## [test.pdf](https://kayoo123.github.io/Prez/test.pdf)
