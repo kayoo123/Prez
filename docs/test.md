@@ -20,6 +20,6 @@ foobar 1
 
 ---
 # Slide 2
-foobar 4
+foobar 1
 ```
 
