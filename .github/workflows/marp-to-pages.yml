@@ -1,3 +1,5 @@
+# https://github.com/ralexander-phi/marp-to-pages/blob/main/.github/workflows/marp-to-pages.yml
+
 ---
 name: marp-to-pages
 on:
@@ -10,28 +12,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-  steps:
-    - uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
   
-    - name: Get list file.md
-      run: echo Hello, world!
+      - name: Get list file.md
+        run: echo Hello, world!
   
-    - name: Update index.html
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      - name: Update index.html
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
 
-    - name: Build PDF
-      uses: docker://marpteam/marp-cli:v2.3.0
-      with:
-        args: test.md -o docs/index.pdf
-      env:
-        MARP_USER: root:root
+      - name: Build PDF
+        uses: docker://marpteam/marp-cli:v2.3.0
+        with:
+          args: test.md -o docs/index.pdf
+        env:
+          MARP_USER: root:root
 
-    - name: Build HTML
-      uses: docker://marpteam/marp-cli:v2.3.0
-      with:
-        args: test.md -o docs/index.html
-      env:
-        MARP_USER: root:root
+      - name: Build HTML
+        uses: docker://marpteam/marp-cli:v2.3.0
+        with:
+          args: test.md -o docs/index.html
+        env:
+          MARP_USER: root:root
