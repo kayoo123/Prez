@@ -1,6 +1,7 @@
 ---
 marp: true
 theme: academic
+marpit.themeSet.default = marpit.themeSet.add('academic')
 paginate: true
 math: katex
 ---
