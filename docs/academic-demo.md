@@ -5,7 +5,6 @@ paginate: true
 math: katex
 ---
 
-
 <!-- _class: lead -->
 
 # Marpで研究室の発表スライドを作る
