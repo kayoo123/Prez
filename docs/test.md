@@ -22,7 +22,3 @@ foobar
 # Slide 2
 foobar
 ```
-
---- 
-
-# test 1
