@@ -69,11 +69,13 @@ jobs:
     - name: Generate HTML
       run: |
         cd docs
-        marp --allow-local-files --theme ../themes/*.css --html *.md
+        #marp --allow-local-files --theme ../themes/*.css --html *.md
+        marp --html *.md
     - name: Generate PDF
       run: |
         cd docs
-        marp --allow-local-files --theme ../themes/*.css --pdf *.md
+        #marp --allow-local-files --theme ../themes/*.css --pdf *.md
+        marp --pdf *.md
     - name: Commit HTML & PDF
       run: |
         git config --local user.email "action@github.com"
