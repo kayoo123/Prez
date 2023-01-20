@@ -18,7 +18,7 @@ jobs:
         cd docs
         sed -i "/item float-item/d" index.html
         for input in *.md; do
-           sed -i -e "s|<!-- LIST -->|<!-- LIST -->\n\t<a href='${input%.*}.html'><li class='item float-item'>${input%.*}</li></a>|g" index.html
+           sed -i -e "s|<!-- STOP-LIST -->|<a href='${input%.*}.html'><li class='item float-item'>${input%.*}</li></a>\n\t<!-- STOP-LIST -->|g" index.html
         done
     - name: Commit index
       run: |
