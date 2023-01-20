@@ -18,12 +18,13 @@ jobs:
         cd docs
         sed -i "/item float-item/d" index.html
         for input in docs/*.md; do
-           sed -i -e "s|<!-- LIST -->|<!-- LIST -->\n\t\t<a href='${input%.*}.html'><li class='item float-item'>${input%.*}</li></a>|g" index.html
+           sed -i -e "s|<!-- LIST -->|<!-- LIST -->\n\t<a href='${input%.*}.html'><li class='item float-item'>${input%.*}</li></a>|g" index.html
         done
     - name: Commit index
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        git pull --rebase
         git add docs/index.html
         git commit -m "Generated HTML & PDF"
     - name: Push changes
@@ -51,6 +52,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        git pull --rebase
         git add docs/*.html
         git add docs/*.pdf
         git commit -m "Generated HTML & PDF"
