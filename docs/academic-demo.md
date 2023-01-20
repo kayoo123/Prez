@@ -1,10 +1,14 @@
 ---
 marp: true
 theme: academic
-marpit.themeSet.default = marpit.themeSet.add('academic')
 paginate: true
 math: katex
 ---
+<style>
+section {
+  background: yellow;
+}
+</style>
 
 <!-- _class: lead -->
 
