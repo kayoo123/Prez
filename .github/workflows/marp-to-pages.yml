@@ -22,6 +22,8 @@ jobs:
           done
       - name: Commit Index
         run: |
+          git config --global user.email "jeri.dsql@gmail.com"
+          git config --global user.name "kayoo123"
           git add docs/index.html
           git commit -m "Update index.html"
 
@@ -30,15 +32,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-  
       - name: Build HTML
         uses: docker://marpteam/marp-cli:v2.3.0
         with:
           args: test.md -o docs/test.html
         env:
           MARP_USER: root:root
-  
       - name: Commit html
         run: |
+          git config --global user.email "jeri.dsql@gmail.com"
+          git config --global user.name "kayoo123"
           git add docs/*.html
           git commit -m "Update *.html"
