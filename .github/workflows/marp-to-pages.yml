@@ -15,9 +15,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: Generate HTML
       run: |
-        sed -i "/item float-item/d" docs/index.html
+        cd docs
+        sed -i "/item float-item/d" index.html
         for input in docs/*.md; do
-           sed -i -e "s|<!-- LIST -->|<!-- LIST -->\n<a href='${input%.*}.html'><li class='item float-item'>${input%.*}</li></a>|g" docs/index.html
+           sed -i -e "s|<!-- LIST -->|<!-- LIST -->\n\t\t<a href='${input%.*}.html'><li class='item float-item'>${input%.*}</li></a>|g" index.html
         done
     - name: Commit index
       run: |
